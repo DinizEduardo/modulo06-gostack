@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Keyboard, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import IconFa from 'react-native-vector-icons/FontAwesome';
 import api from '../../services/api';
 import {
   Container,
@@ -16,6 +17,8 @@ import {
   Bio,
   ProfileButton,
   ProfileButtonText,
+  TrashButton,
+  Buttons,
 } from './styles';
 
 export default class Main extends Component {
@@ -72,6 +75,17 @@ export default class Main extends Component {
     Keyboard.dismiss();
   };
 
+  handleRemoveUser = login => {
+    const { users } = this.state;
+
+    const id = users.findIndex(findUser => findUser.login === login);
+
+    users.splice(id, 1);
+    this.setState({ users });
+
+    AsyncStorage.setItem('users', JSON.stringify(users));
+  };
+
   handleNavigate = user => {
     const { navigation } = this.props;
 
@@ -109,9 +123,14 @@ export default class Main extends Component {
               <Avatar source={{ uri: item.avatar }} />
               <Name>{item.name}</Name>
               <Bio>{item.bio}</Bio>
-              <ProfileButton onPress={() => this.handleNavigate(item)}>
-                <ProfileButtonText>Ver perfil</ProfileButtonText>
-              </ProfileButton>
+              <Buttons>
+                <ProfileButton onPress={() => this.handleNavigate(item)}>
+                  <ProfileButtonText>Ver perfil</ProfileButtonText>
+                </ProfileButton>
+                <TrashButton onPress={() => this.handleRemoveUser(item.login)}>
+                  <IconFa name="trash" size={20} color="#fff" />
+                </TrashButton>
+              </Buttons>
             </User>
           )}
         />

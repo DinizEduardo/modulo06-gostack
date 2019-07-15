@@ -61,7 +61,7 @@ export const Name = styled.Text`
 `;
 
 export const Bio = styled.Text.attrs({
-  numberOfLines: 2, // limita a quantidade de linhas
+  numberOfLinesc: 2, // limita a quantidade de linhas
 })`
   font-size: 13px;
   line-height: 18px;
@@ -72,12 +72,18 @@ export const Bio = styled.Text.attrs({
 
 export const ProfileButton = styled(RectButton)`
   margin-top: 10px;
-  align-self: stretch;
   border-radius: 4px;
+  height: 36px;
   background: #7159c1;
   justify-content: center;
   align-items: center;
-  height: 36px;
+  flex: 1;
+  margin-right: 5px;
+`;
+
+export const Buttons = styled.View`
+  flex-direction: row;
+  width: 100%;
 `;
 
 export const ProfileButtonText = styled.Text`
@@ -85,4 +91,14 @@ export const ProfileButtonText = styled.Text`
   font-weight: bold;
   color: #fff;
   text-transform: uppercase;
+`;
+
+export const TrashButton = styled(RectButton)`
+  background: #cc0000;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  border-radius: 4px;
+  height: 36px;
+  padding: 5px 10px;
 `;
